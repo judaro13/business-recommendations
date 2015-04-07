@@ -86,4 +86,30 @@ namespace :users do
     f.close
     puts 'done'
   end
+
+  task review: :environment do
+    puts 'begin'
+    f = File.open("/tmp/review.json", 'r+')
+    f.each_line do |line|
+      l = JSON.parse(line)
+      b = Business.find_by_yid(l['business_id'])
+      u = User.find_by_yid(l['user_id'])
+      if b && u
+        r = Review.new
+        r.yid = l['review_id']
+        r.business_id = l['business_id']
+        r.user_id = l['user_id']
+        r.stars =l['stars']
+        r.votes = l['votes'].to_s
+        r.description =l['text']
+        r.date =l['date']
+        r.save 
+        print '.'
+      else
+        print '-'
+      end
+    end
+    f.close
+    puts 'done'
+  end
 end

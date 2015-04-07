@@ -1,0 +1,15 @@
+%h5 Evaluator Results 
+%p
+  RSME
+  -r = get_rsme_recomender_result
+  %br  
+  ="Score: #{number_with_precision(r['score'], :precision => 2)}"  
+  %br  
+  ="Standar Deviation: #{number_with_precision(r['stdDeviation'], :precision => 2)}"
+%p
+  IR
+  -r = get_rsme_recomender_result
+  %br  
+  ="Score: #{number_with_precision(r['score'], :precision => 2)}"  
+  %br  
+  ="Standar Deviation: #{number_with_precision(r['stdDeviation'], :precision => 2)}"

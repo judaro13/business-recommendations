@@ -1,0 +1,11 @@
+-items.each do |b|
+  .well
+    %p
+      %span.glyphicon.glyphicon-briefcase
+      =link_to b.second.name, business_path(b.second)
+      %br
+      %span.glyphicon.glyphicon-star
+      =b.first
+      %br
+      %span.glyphicon.glyphicon-comment
+      =b.second.review_count

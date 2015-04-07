@@ -25,30 +25,52 @@
                 =val
     %br
     .container{style: 'text-align: left;'}
+
       %h3
         Recomendations
       .col-md-4
         .panel.panel-default
           .panel-heading
-            Recomender 1
+            Collaborative Filtering
           .panel-body
+            =render 'evaluator_result'
+
+
+            = form_tag user_path(@user), method: :get, class: 'form-inline' do
+              .form-group
+                =select_tag :similarity, options_for_select([['Pearson','pearson'],['Loglike','loglike']]), class: 'form-control'
+                =select_tag :neigborhood, options_for_select([[10, 10],[ 20, 20]]), class: 'form-control'
+              = submit_tag("Go!", class: 'btn btn-primary')
+            %br
+            =render 'business', items: get_bussines_items(@hibrid)
       .col-md-4
         .panel.panel-default
           .panel-heading
-            Recomender 2
-          .panel-body
+            Basado en SVD
+          .panel-body            
+            =render 'evaluator_result'
+            = form_tag user_path(@user), method: :get, class: 'form-inline' do
+              .form-group
+                =label_tag :sigma
+                =select_tag :sigma, options_for_select([[1,1],[2,2]]), class: 'form-control'
+              = submit_tag("Go!", class: 'btn btn-primary')
+            %br
+            =render 'business', items: get_bussines_items(@hibrid)
       .col-md-4
         .panel.panel-default
           .panel-heading
-            Recomender 3
+            Vector de terminos + SVD
           .panel-body
+            =render 'evaluator_result'
+            .div{style: 'margin-bottom: 73px;'}
+            =render 'business', items: get_bussines_items(@hibrid)
     .container
       %h3{style: 'text-align: left;'}
         Business Reviewed
       .row
         .col-sm-12.col-md-12.col-lg-12
           .row.gallery-item
-            -@business.all.each do |u|
+            -@business.all.limit(10).each do |u|
               .col-md-3
                 .thumbnail{style: 'height: 250px;'}
                   .caption
