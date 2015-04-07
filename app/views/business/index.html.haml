@@ -5,23 +5,26 @@
       .row
         .col-lg-8.col-lg-offset-2
           .section-heading
-            %h2 Users
+            %h2 Business
             %p Lorem ipsum dolor sit amet, no nisl mentitum recusabo per, vim at blandit qualisque dissentiunt. Diam efficiantur conclusionemque ut has
   .container
     .row
       .col-sm-12.col-md-12.col-lg-12
         .row.gallery-item
-          -@users.all.each do |u|
+          -@business.all.each do |u|
             .col-md-3
               .thumbnail{style: 'height: 250px;'}
                 .caption
                   %h1
-                    %span.glyphicon.glyphicon-user
-                  = link_to u.name, user_path(u)
-                  %p 
+                    %span.glyphicon.glyphicon-briefcase
+                  %p
+                    = link_to u.name, business_path(u)
                     %br
+                    = "#{u.city}, #{u.state}"
+                  %p 
                     %span.glyphicon.glyphicon-star{style: 'padding: 10px'}
+                      =u.stars 
+                    %span.glyphicon.glyphicon-comment{style: 'padding: 10px'}
                       =u.review_count 
-                    %span.glyphicon.glyphicon-sunglasses{style: 'padding: 10px'}
-                      =u.friends.split(',').count
+              
   = will_paginate @users

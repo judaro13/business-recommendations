@@ -5,7 +5,8 @@
     %meta{:charset => "utf-8"}
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
     = stylesheet_link_tag    'bootstrap', 'nivo-lightbox', 'font-awesome', 'nivo-lightbox-theme/default/default', 'animate', 'style', 'default', media: 'all'
-    = javascript_include_tag 'jquery.min', 'bootstrap','jquery.easing.min', 'classie', 'gnmenu', 'jquery.scrollTo', 'nivo-lightbox.min', 'stellar', 'custom'
+    = javascript_include_tag 'jquery.min', 'bootstrap','jquery.easing.min', 'classie', 'gnmenu', 'jquery.scrollTo', 'nivo-lightbox.min', 'stellar', 'custom', 'jquery.webRating.min'
+    %script{:src => "http://maps.googleapis.com/maps/api/js?sensor=false"}
 
     = csrf_meta_tags
   %body{"data-spy" => "scroll"}

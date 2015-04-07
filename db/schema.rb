@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406160520) do
+ActiveRecord::Schema.define(version: 20150407132014) do
 
   create_table "businesses", force: :cascade do |t|
     t.string   "yid"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20150406160520) do
     t.string   "yattributes"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "longitude"
+    t.string   "latitude"
   end
 
   create_table "reviews", force: :cascade do |t|

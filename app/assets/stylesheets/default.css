@@ -37,3 +37,9 @@ footer {
   background-color: #eb5d1e;
   border-color: #eb5d1e;
 }
+
+#map-canvas{
+  height: 200px;
+  width: 200px;
+}
+

@@ -1,9 +1,66 @@
 
+
+/ #<User id: 1, yid: "Xqd0DzHaiyRqVH3WRG7hzg", name: "Lily", review_count: 270, average_stars: 3.71, votes: 0, friends: "Rir-YRPPClKXDFQbc3BsVw,P-lfV8cdAgEOZJkw2dJpsw,-4OU...", compliments: "{\"profile\"=>2, \"cute\"=>3, \"funny\"=>6, \"plain\"=>21,...", fans: 21, created_at: "2015-04-06 16:15:07", updated_at: "2015-04-06 23:45:24">
 %section#works.home-section.text-center.bg-gray
   .heading-works.marginbot-50
     .container
       .row
-        .col-lg-8.col-lg-offset-2
-          .section-heading
-            %span.glyphicon.glyphicon-star{"aria-hidden" => "true"}
-            =@user.inspect
+        .col-md-3
+          =image_tag 'http://uxrepo.com/static/icon-sets/elusive/svg/user.svg', style: 'height: 200px;'
+        .col-md-9{style: 'text-align: left;'}
+          %h3{style: 'text-align: left;'}
+            =@user.name
+          =@user.average_stars 
+          %span.glyphicon.glyphicon-star{style: 'padding: 10px'}
+          =@user.review_count  
+          %span.glyphicon.glyphicon-comment{style: 'padding: 10px'}
+          %br
+          =@user.friends.split(',').count
+          %span.glyphicon.glyphicon-sunglasses{style: 'padding: 10px'}
+          %br
+          -eval(@user.compliments).each do |key, val|
+            %span.label.label-default{style: 'margin-right: 5px; font-size: 12px;'}
+              =key
+              %span.badge 
+                =val
+    %br
+    .container{style: 'text-align: left;'}
+      %h3
+        Recomendations
+      .col-md-4
+        .panel.panel-default
+          .panel-heading
+            Recomender 1
+          .panel-body
+      .col-md-4
+        .panel.panel-default
+          .panel-heading
+            Recomender 2
+          .panel-body
+      .col-md-4
+        .panel.panel-default
+          .panel-heading
+            Recomender 3
+          .panel-body
+    .container
+      %h3{style: 'text-align: left;'}
+        Business Reviewed
+      .row
+        .col-sm-12.col-md-12.col-lg-12
+          .row.gallery-item
+            -@business.all.each do |u|
+              .col-md-3
+                .thumbnail{style: 'height: 250px;'}
+                  .caption
+                    %h1
+                      %span.glyphicon.glyphicon-briefcase
+                    %p
+                      = link_to u.name, business_path(u)
+                      %br
+                      = "#{u.city}, #{u.state}"
+                    %p 
+                      %span.glyphicon.glyphicon-star{style: 'padding: 10px'}
+                        =u.stars 
+                      %span.glyphicon.glyphicon-comment{style: 'padding: 10px'}
+                        =u.review_count 
+    

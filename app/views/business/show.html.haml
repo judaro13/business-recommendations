@@ -1,0 +1,92 @@
+
+%section#works.home-section.text-center.bg-gray
+  .heading-works.marginbot-50
+    .container
+      .row
+        .col-md-3
+          #map-canvas
+        .col-md-9{style: 'text-align: left;'}
+          %h3{style: 'text-align: left;'}
+            =@business.name
+          =@business.stars 
+          %span.glyphicon.glyphicon-star{style: 'padding: 10px'}
+          =@business.review_count  
+          %span.glyphicon.glyphicon-comment{style: 'padding: 10px'}
+          %br
+          =@business.full_address
+          %br
+          = "#{@business.city}, #{@business.state}"
+          %br
+          -@business.categories.split(',').each do |val|
+            %span.label.label-default{style: 'margin-right: 5px;'}
+              =val
+    %br
+    .container{style: 'text-align: left;'}
+      %h3
+        Recomendations
+      .col-md-4
+        .panel.panel-default
+          .panel-heading
+            Recomender 1
+          .panel-body
+      .col-md-4
+        .panel.panel-default
+          .panel-heading
+            Recomender 2
+          .panel-body
+      .col-md-4
+        .panel.panel-default
+          .panel-heading
+            Recomender 3
+          .panel-body
+    %br
+    .container{style: 'text-align: left;'}
+      %h3{style: 'text-align: left;'}
+        Reviews
+      -@reviews.each do |r|
+        .panel.panel-default
+          .panel-body
+            .col-sm-1
+              %h1 
+                %span.glyphicon.glyphicon-user
+            .col-sm-11
+              %h3
+                = User.where(yid: r.user_id).first.name
+              =r.description
+
+
+:javascript 
+  // Define the address we want to map.
+  var address = "1 infinite loop cupertino ca 95014";
+  
+  // Create a new Geocoder
+  var geocoder = new google.maps.Geocoder();
+  
+  // Locate the address using the Geocoder.
+  geocoder.geocode( { "address": address }, function(results, status) {
+  
+    // If the Geocoding was successful
+    if (status == google.maps.GeocoderStatus.OK) {
+  
+      // Create a Google Map at the latitude/longitude returned by the Geocoder.
+      var myOptions = {
+        zoom: 16,
+        center: new google.maps.LatLng(parseFloat("#{@business.latitude}"), parseFloat("#{@business.longitude}")),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+  
+      // Add a marker at the address.
+      var marker = new google.maps.Marker({
+        map: map,
+        position: new google.maps.LatLng(parseFloat("#{@business.latitude}"), parseFloat("#{@business.longitude}"))
+      });
+  
+    } else {
+      try {
+        console.error("Geocode was not successful for the following reason: " + status);
+      } catch(e) {}
+    }
+  });
+
+  
