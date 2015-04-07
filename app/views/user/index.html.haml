@@ -1,0 +1,29 @@
+
+%section#works.home-section.text-center.bg-gray
+  .heading-works.marginbot-50
+    .container
+      .row
+        .col-lg-8.col-lg-offset-2
+          .section-heading
+            %h2 Usuarios
+            %p Lorem ipsum dolor sit amet, no nisl mentitum recusabo per, vim at blandit qualisque dissentiunt. Diam efficiantur conclusionemque ut has
+  .container
+    .row
+      .col-sm-12.col-md-12.col-lg-12
+        .row.gallery-item
+          -@users.all.each do |u|
+            .col-md-3
+              .thumbnail
+                .caption
+                  %h3 
+                    %span.glyphicon.glyphicon-user
+                      = link_to u.name, user_path(u)
+                  %p 
+                    %br
+                    %span.glyphicon.glyphicon-star{style: 'padding: 10px'}
+                      =u.review_count 
+                    %span.glyphicon.glyphicon-sunglasses{style: 'padding: 10px'}
+                      =u.friends.split(',').count
+                    %span.glyphicon.glyphicon-heart{style: 'padding: 10px'}
+                      =u.fans
+  = will_paginate @users
