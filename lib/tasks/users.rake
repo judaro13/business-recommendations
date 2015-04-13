@@ -112,4 +112,19 @@ namespace :users do
     f.close
     puts 'done'
   end
+
+
+  task review_yid: :environment do
+    puts 'begin'
+
+    Review.all.each do |r|
+      u = User.where(yid: r.user_yid).first
+      b = Business.where(yid: r.business_yid).first
+      r.user_id = u.id
+      r.business_id = b.id
+      r.save
+      print '.'
+    end
+    puts 'done'
+  end
 end

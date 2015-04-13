@@ -32,7 +32,7 @@
                 %span.glyphicon.glyphicon-user
             .col-sm-11
               %h3
-                = User.where(yid: r.user_id).first.name
+                = link_to r.user.name, user_path(r.user)
               =r.description
 
 

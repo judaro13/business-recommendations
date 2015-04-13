@@ -9,7 +9,7 @@ class BusinessController < ApplicationController
 
   def show
     @business = Business.find(params[:id])
-    @reviews = Review.where(business_id: @business.yid)
+    @reviews = @business.reviews
     render layout: 'simple'
   end
 end

@@ -33,35 +33,28 @@
           .panel-heading
             Collaborative Filtering
           .panel-body
-            =render 'evaluator_result'
-
-
+            =render 'evaluator_result', locals: { rsme: @collaborative_rsm, ir: @collaborative_ir }
             = form_tag user_path(@user), method: :get, class: 'form-inline' do
               .form-group
-                =select_tag :similarity, options_for_select([['Pearson','pearson'],['Loglike','loglike']]), class: 'form-control'
-                =select_tag :neigborhood, options_for_select([[10, 10],[ 20, 20]]), class: 'form-control'
+                =select_tag :similarity, options_for_select([['Pearson','pearson'],['Loglike','loglike']], select_similarity), class: 'form-control'
+                =select_tag :neigborhood, options_for_select([[10, 10],[ 20, 20]], select_neigborhood), class: 'form-control'
               = submit_tag("Go!", class: 'btn btn-primary')
             %br
-            =render 'business', items: get_bussines_items(@hibrid)
+            =render 'business', items: get_bussines_items(@collaborative)
       .col-md-4
         .panel.panel-default
           .panel-heading
             Basado en SVD
           .panel-body            
-            =render 'evaluator_result'
-            = form_tag user_path(@user), method: :get, class: 'form-inline' do
-              .form-group
-                =label_tag :sigma
-                =select_tag :sigma, options_for_select([[1,1],[2,2]]), class: 'form-control'
-              = submit_tag("Go!", class: 'btn btn-primary')
-            %br
-            =render 'business', items: get_bussines_items(@hibrid)
+            =render 'evaluator_result', locals: { rsme: @svd_rsm, ir: @svd_ir }
+            .div{style: 'margin-bottom: 73px;'}
+            =render 'business', items: get_bussines_items(@svd)
       .col-md-4
         .panel.panel-default
           .panel-heading
             Vector de terminos + SVD
           .panel-body
-            =render 'evaluator_result'
+            =render 'evaluator_result', locals: { rsme: @svd_rsm, ir: @svd_ir }
             .div{style: 'margin-bottom: 73px;'}
             =render 'business', items: get_bussines_items(@hibrid)
     .container
