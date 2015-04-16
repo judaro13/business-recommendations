@@ -1,12 +1,22 @@
--items.each do |b|
-  -next unless b.second
-  .well
-    %p
-      %span.glyphicon.glyphicon-briefcase
-      =link_to b.second.name, business_path(b.second)
-      %br
-      %span.glyphicon.glyphicon-star
-      =b.first
-      %br
-      %span.glyphicon.glyphicon-comment
-      =b.second.review_count
+-items[0...10].each do |b|
+  -if b.second.kind_of?(Hash)
+    .well
+      %p
+        %span.glyphicon.glyphicon-briefcase
+        = b.second['name']
+        %br
+        %span.glyphicon.glyphicon-star
+        =b.first
+        %br
+        %span.glyphicon.glyphicon-comment
+  -else
+    .well
+      %p
+        %span.glyphicon.glyphicon-briefcase
+        =link_to b.second.name, business_path(b.second)
+        %br
+        %span.glyphicon.glyphicon-star
+        =b.first
+        %br
+        %span.glyphicon.glyphicon-comment
+        =b.second.review_count
