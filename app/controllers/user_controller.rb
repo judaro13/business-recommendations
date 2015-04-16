@@ -39,9 +39,11 @@ class UserController < ApplicationController
     
     @svd = JSON.parse(Net::HTTP.get(URI.parse(path+@svd)))
     @collaborative = JSON.parse(Net::HTTP.get(URI.parse(path+@collaborative)))
-    @hibrid = JSON.parse(Net::HTTP.get(URI.parse(path+"recommendation7/_taste/user/#{@user.yid}")))
 
-  
+    @hibrid = JSON.parse(Net::HTTP.get(URI.parse(path+"recommendator2b/#{@user.yid}?pretty")))
+    @hibrid_rsm = JSON.parse(Net::HTTP.get(URI.parse(path + 'rec3RMS/_search?pretty')))
+    @hibrid_ir = JSON.parse(Net::HTTP.get(URI.parse(path + 'rec3IRS/_search?pretty')))
+
     render layout: 'simple'
   end
 end

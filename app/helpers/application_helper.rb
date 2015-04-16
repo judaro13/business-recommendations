@@ -2,9 +2,16 @@ module ApplicationHelper
 
   def get_bussines_items(recommender)
     business = []
-    recommender['hits']['hits'].first['_source']['items'].each do |val|
-      business << [val['value'], 
-        Business.where(yid: val['item']['system_id']).first]
+    if recommender['_source']
+      recommender['_source']['items'].each do |val|
+        business << [val['value'], 
+          Business.where(yid: val['item']['system_id']).first]
+      end
+    else
+      recommender['hits']['hits'].first['_source']['items'].each do |val|
+        business << [val['value'], 
+          Business.where(yid: val['item']['system_id']).first]
+      end
     end
     business
   end
@@ -27,7 +34,7 @@ module ApplicationHelper
   end
 
   def get_ir_recommender_result(result=nil)
-  result['hits']['hits'].first['_source']['evaluation']
+    result['hits']['hits'].first['_source']['evaluation']
   end
 
   def get_rsme_recomender_result(result=nil)

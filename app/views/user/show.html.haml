@@ -54,7 +54,7 @@
           .panel-heading
             Vector de terminos + SVD
           .panel-body
-            =render 'evaluator_result', locals: { rsme: @svd_rsm, ir: @svd_ir }
+            =render 'evaluator_result', locals: { rsme: @hibrid_rsm, ir: @hibrid_ir }
             .div{style: 'margin-bottom: 73px;'}
             =render 'business', items: get_bussines_items(@hibrid)
     .container
